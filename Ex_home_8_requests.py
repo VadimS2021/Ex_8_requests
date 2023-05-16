@@ -14,7 +14,7 @@ def main():
     intelligence_hero = dict([max(intelligence.items(), key=lambda k_v: k_v[1])])
     most_intelligence = [(key, value) for key, value in intelligence_hero.items()]
 
-    print(f"Самый умный супергерой - {most_intelligence[0][0]} с интеллектом, {most_intelligence[0][1]}")
+    print(f"Самый умный супергерой - {most_intelligence[0][0]}, с интеллектом, {most_intelligence[0][1]}")
 
 
 main()
