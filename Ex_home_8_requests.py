@@ -18,3 +18,26 @@ def main():
 
 
 main()
+
+print('\nЗадача №2\n')
+
+
+def upload_file_to_disk(disk_file_path, file_name):
+    with open('token.txt', 'r') as token_file:
+        token = token_file.readline()
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'OAuth {token}'
+    }
+    upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
+    params = {"path": disk_file_path, "overwrite": "true"}
+    response = requests.get(upload_url, headers=headers, params=params)
+    response_data = response.json()
+    url_to_upload = response_data['href']
+    response = requests.put(url_to_upload, data=open(file_name, 'rb'))
+    response.raise_for_status()
+    if response.status_code == 201:
+        print("Файл Test.txt добавлен на ЯндексДиск")
+
+
+upload_file_to_disk('Test.txt', 'Test.txt')
